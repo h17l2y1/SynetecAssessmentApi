@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SynetecAssessmentApi.Persistence.Repositories;
@@ -25,8 +23,8 @@ namespace SynetecAssessmentApi.Persistence.Config
         private static void Initialize(IServiceCollection services)
         {
             ServiceProvider serviceProvider = services.BuildServiceProvider();
-            // DbContextGenerator.Initialize(serviceProvider);
-        }
+			DbContextGenerator.Initialize(serviceProvider);
+		}
 
         private static void AddDependencies(IServiceCollection services)
         {

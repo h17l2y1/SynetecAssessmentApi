@@ -53,25 +53,17 @@ namespace SynetecAssessmentApi.BLL.Services
                 throw new ApplicationException(ExceptionsConstants.ApplicationExceptions.Employee.NotFound);
             }
 
-            //get the total salary budget for the company
             int totalSalary = await _employeeRepository.GetSalarySum();
-            
-            //calculate the bonus allocation for the employee
-            decimal bonusPercentage = (decimal)employee.Salary / (decimal)totalSalary;
+            decimal bonusPercentage = (decimal)employee.Salary / totalSalary;
             int bonusAllocation = (int)(bonusPercentage * bonusPoolAmount);
-            
-            return new BonusPoolCalculatorResultDto
+
+			return new BonusPoolCalculatorResultDto
             {
                 Employee = new EmployeeDto
                 {
                     Fullname = employee.Fullname,
                     JobTitle = employee.JobTitle,
-                    Salary = employee.Salary,
-                    Department = new DepartmentDto
-                    {
-                        Title = employee.Department.Title,
-                        Description = employee.Department.Description
-                    }
+                    Salary = employee.Salary
                 },
             
                 Amount = bonusAllocation
